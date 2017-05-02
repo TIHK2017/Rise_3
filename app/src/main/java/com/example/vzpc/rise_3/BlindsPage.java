@@ -1,7 +1,5 @@
 package com.example.vzpc.rise_3;
 
-
-
 import android.content.Context;
 import android.media.Image;
 import android.os.Bundle;

@@ -31,6 +31,10 @@ public class HomePage extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        if (savedInstanceState != null) {
+            // restore the text that you saved in from onPause()
+            // also remember to write onPaust()
+        }
     }
 
 
