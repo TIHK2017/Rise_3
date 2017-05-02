@@ -12,6 +12,8 @@ import android.widget.ImageView;
 import android.widget.SeekBar;
 import android.widget.Toast;
 
+import static java.lang.Math.round;
+
 public class BlindsPage extends Fragment {
 
     private OnFragmentInteractionListener listener;
@@ -35,11 +37,19 @@ public class BlindsPage extends Fragment {
 
         SeekBar.OnSeekBarChangeListener mSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
             @Override
+            // gets called when you move the slider bar
+            // here we change the height of the black box that's over the Rise logo as the slider
+            //   bar moves
+            // this gives the effect of blinds being pulled downward
+            //
+            // progress: the value that the slider bar is currently at
+            //      default range is 0 to 100
+            // look at android monitor to see value of progress bar as you move slider
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 ViewGroup.LayoutParams params = blindsView.getLayoutParams();
-                params.height = progress;
+                params.height = (int) round(1.5*progress);
                 blindsView.setLayoutParams(params);
-                Log.d("poop", String.valueOf(progress));
+                Log.d("poop", String.valueOf(progress)); //
             }
 
             @Override

@@ -23,7 +23,6 @@ public class RiseApp extends AppCompatActivity implements
         TempPage.OnFragmentInteractionListener
 
 {
-
     SharedPreferences sharedPref = null;
 
     @Override

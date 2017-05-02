@@ -35,23 +35,26 @@ public class BreathePage extends Fragment{
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_breathe_page, container, false);
 
+        // number of images to cycle through
         imageNum = 0;
 
+        //
         exerciseView = (ImageView) view.findViewById(R.id.exerciseView);
         ImageButton nextButt = (ImageButton) view.findViewById(R.id.nextButt);
         ImageButton prevButt = (ImageButton) view.findViewById(R.id.prevButt);
 
+        // ActionListener for the buttons
         nextButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleClick(v);
+                handleClick(v); // see comments for this function below
             }
         });
 
         prevButt.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                handleClick(v);
+                handleClick(v); // same as above
             }
         });
 
@@ -59,6 +62,13 @@ public class BreathePage extends Fragment{
 
     }
 
+    // handles what to do to the ImageView once a button is pressed
+    // '%' is the modulo operator. it does remainder division
+    // 2%3 = 2 because 2/3 = 0 (remainder 2)
+    // 0%3 = 0, and most interestingly,
+    // 3%3 = 0 (because 3/3 = 1 (remainder 0))
+    // mod is used for cycling thru a list of number from 0 to n
+    // here it's used to cycle thru 0, 1, and 2
     void handleClick(View v) {
         if (v.getId() == R.id.nextButt) {
             imageNum = (imageNum+1)%3;
@@ -66,6 +76,7 @@ public class BreathePage extends Fragment{
         } else {
             imageNum = (imageNum+2)%3;
         }
+        // change pictures here
         switch (imageNum) {
             case 2:
                 exerciseView.setImageResource(R.drawable.weather);
@@ -73,7 +84,7 @@ public class BreathePage extends Fragment{
             case 1:
                 exerciseView.setImageResource(R.drawable.meditate);
                 break;
-            default:
+            default: // default is all other numbers. default handles because imageNum starts at 0
                 exerciseView.setImageResource(R.mipmap.ic_launcher);
                 break;
 
