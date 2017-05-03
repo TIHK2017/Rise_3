@@ -88,20 +88,25 @@ public class TempPage extends Fragment {
             public void onClick(View v) {
                 sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
                 // constants
-                double k = 400;
-                double time = 1;
-                int diff;
-                double power;
+                double k = 0.563;   // power constant
+                int time = 1;       // hours
+                int diff;           // current/desired temp difference
+                double power;       // power consumption. changes depending on the temperature
+                                    // differential
                 String message;
 
+                int temp = Integer.parseInt(sharedPref.getString("Temperature","-273"));
+                int curr = sharedPref.getInt("Current Temp", 0);
+
                 // calculate values
-                // diff = abs(sharedPref.getInt("Temperature",-273) - sharedPref.getInt("Current Temp", 0));
-                //power = k*time*diff;
-                //message = "Power consumption is ";//+String.valueOf(power)+"kWh";
-                // after "+String.valueOf(time)+" hours
+                diff = abs(temp - curr);    // assumes heating takes as much energy as cooling does
+                power = k*time*diff;        // self-made formula. replace with something more
+                                            // accurate to system
+                message = "Power consumption after " + String.valueOf(time) +
+                         " hours is " + String.valueOf(power)+"kW";
 
                 // confirmation
-                //Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
+                Toast.makeText(getContext(), message, Toast.LENGTH_LONG).show();
             }
         });
         return view;
