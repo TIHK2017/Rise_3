@@ -47,7 +47,6 @@ public class TempPage extends Fragment {
 
         // restore set temperature to tempDesired when the view is recreated
         tempDesired = (EditText) view.findViewById(R.id.tempDesired);
-        String value = tempDesired.getText().toString();
         sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
         tempDesired.setText(sharedPref.getString("Temperature",""));
 
@@ -95,7 +94,9 @@ public class TempPage extends Fragment {
                                     // differential
                 String message;
 
-                int temp = Integer.parseInt(sharedPref.getString("Temperature","-273"));
+                tempDesired = (EditText) getView().findViewById(R.id.tempDesired);
+
+                int temp = Integer.parseInt(tempDesired.getText().toString());
                 int curr = sharedPref.getInt("Current Temp", 0);
 
                 // calculate values

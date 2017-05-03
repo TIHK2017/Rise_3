@@ -4,11 +4,14 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.ColorDrawable;
+import android.graphics.pdf.PdfRenderer;
 import android.media.Image;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
@@ -31,7 +34,7 @@ public class BlindsPage extends Fragment {
     private OnFragmentInteractionListener listener;
     private Button setButton;
     private PopupWindow PopupWindow;
-
+    SharedPreferences sharedPref = null;
 
     public static BlindsPage newInstance() {
         return new BlindsPage();
@@ -46,38 +49,15 @@ public class BlindsPage extends Fragment {
 
     @Override
     public View onCreateView(final LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final View view = inflater.inflate(R.layout.fragment_blinds_page, container, false);
+        View view = inflater.inflate(R.layout.fragment_blinds_page, container, false);
 
-        setButton = (Button) view.findViewById(R.id.setBlinds);
+        // restore seekBar progress and boxHeight
+        sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+        ImageView blindsView = (ImageView) view.findViewById(R.id.blindsView);
+        changeBoxHeight(blindsView, sharedPref.getInt("Blinds Progress", -2));
 
-        setButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Toast.makeText(getContext(),"Blinds set",
-                        Toast.LENGTH_SHORT).show();
-            }
-        });
-//        setButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                View customView = inflater.inflate(R.layout.setblinds_popup);
-//                final PopupWindow mPopupWindow = new PopupWindow(customView, ViewPager.LayoutParams.WRAP_CONTENT,
-//                        ViewPager.LayoutParams.WRAP_CONTENT);
-//                mPopupWindow.showAtLocation(view, Gravity.CENTER,0,0);
-//
-//                //mPopupWindow.setBackgroundDrawable(new ColorDrawable());
-//               // mPopupWindow.setOutsideTouchable(true);
-//
-//        }
-
-
-
-
-        // Create seek bar to adjust blinds
         SeekBar mSeekBar = (SeekBar) view.findViewById(R.id.seekBar);
-        final ImageView blindsView = (ImageView) view.findViewById(R.id.blindsView);
-
-
+        mSeekBar.setProgress(sharedPref.getInt("Blinds Progress", -2));
         SeekBar.OnSeekBarChangeListener mSeekBarListener = new SeekBar.OnSeekBarChangeListener() {
             @Override
             // gets called when you move the slider bar
@@ -89,27 +69,36 @@ public class BlindsPage extends Fragment {
             //      default range is 0 to 100
             // look at android monitor to see value of progress bar as you move slider
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                ViewGroup.LayoutParams params = blindsView.getLayoutParams();
-                params.height = (int) round(3.5*progress);
-                blindsView.setLayoutParams(params);
+                ImageView blindsView = (ImageView) getView().findViewById(R.id.blindsView);
+                changeBoxHeight(blindsView, progress);
                 Log.d("poop", String.valueOf(progress)); //
             }
 
             @Override
-            public void onStartTrackingTouch(SeekBar seekBar) {
-
-            }
-
+            public void onStartTrackingTouch(SeekBar seekBar) {}
             @Override
-            public void onStopTrackingTouch(SeekBar seekBar) {
-
-            }
+            public void onStopTrackingTouch(SeekBar seekBar) {}
         };
-
         mSeekBar.setOnSeekBarChangeListener(mSeekBarListener);
 
-        return view;
+        setButton = (Button) view.findViewById(R.id.setBlinds);
+        setButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                SeekBar mSeekBar = (SeekBar) getView().findViewById(R.id.seekBar);
+                int progress = mSeekBar.getProgress();
 
+                sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putInt("Blinds Progress", progress);
+                editor.commit();
+
+                Toast.makeText(getContext(),"Blinds set",
+                        Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        return view;
     }
 
     @Override
@@ -129,6 +118,13 @@ public class BlindsPage extends Fragment {
     }
 
     public interface OnFragmentInteractionListener {
+    }
+
+    // changes the height of the blinds box according to seekBar's progress
+    private void changeBoxHeight(ImageView blindsView, int progress){
+        ViewGroup.LayoutParams params = blindsView.getLayoutParams();
+        params.height = (int) round(3.5*progress);
+        blindsView.setLayoutParams(params);
     }
 }
 
