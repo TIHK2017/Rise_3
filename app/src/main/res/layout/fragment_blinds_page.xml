@@ -57,7 +57,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.656"
+            app:layout_constraintVertical_bias="0.723"
             app:srcCompat="@drawable/window" />
 
         <ImageView
@@ -90,25 +90,7 @@
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/sunView"
-            app:layout_constraintVertical_bias="0.0" />
-
-        <ImageButton
-            android:id="@+id/leaf"
-            android:layout_width="94dp"
-            android:layout_height="50dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@android:color/transparent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintHorizontal_bias="0.272"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.96"
-            app:srcCompat="@drawable/leaf_small"
-            tools:layout_editor_absoluteY="436dp" />
+            app:layout_constraintVertical_bias="0.277" />
 
         <TextView
             android:id="@+id/blinds_banner"
@@ -187,23 +169,6 @@
             app:layout_constraintVertical_bias="0.205"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
-
-        <Button
-            android:id="@+id/blindsEnergy"
-            android:layout_width="184dp"
-            android:layout_height="48dp"
-            android:layout_marginBottom="8dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginRight="8dp"
-            android:layout_marginTop="8dp"
-            android:background="@drawable/border"
-            android:text="     Energy savings"
-            android:textColor="@color/colorWhite"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/setBlinds"
-            app:layout_constraintVertical_bias="0.487" />
 
 
     </android.support.constraint.ConstraintLayout>

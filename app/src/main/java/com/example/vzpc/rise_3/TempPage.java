@@ -66,6 +66,14 @@ public class TempPage extends Fragment {
 
                     tempDesired.setError("Input temperature here.");
                 }
+                else if (Integer.parseInt(tempDesired.getText().toString())>= 100){
+                    tempDesired.setError("Temp too high. Choose value below 100°F.");
+
+
+                }
+                else if (Integer.parseInt(tempDesired.getText().toString()) <= 40){
+                    tempDesired.setError("Temp too low. Choose value above 40°F.");
+                }
                 else{
                     // store the temperature
                     sharedPref = PreferenceManager.getDefaultSharedPreferences(getActivity());
