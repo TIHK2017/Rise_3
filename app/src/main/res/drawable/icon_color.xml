@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
 <selector xmlns:android="http://schemas.android.com/apk/res/android">
 
+
     <item
-        android:color="#9d9999"
+        android:color="@color/colorlightGray"
         android:state_checked="false"/>
     <item
         android:color="@color/colorWhite"
         android:state_checked="true"/>
+
 
 </selector>

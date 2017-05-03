@@ -10,13 +10,11 @@ import android.support.v4.app.FragmentActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.support.v4.app.FragmentTabHost;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 
 
 public class BreathePage extends Fragment{
-    private FragmentTabHost mTabHost;
     private OnFragmentInteractionListener listener;
     private int imageNum;
     private  ImageView exerciseView;
@@ -79,13 +77,13 @@ public class BreathePage extends Fragment{
         // change pictures here
         switch (imageNum) {
             case 2:
-                exerciseView.setImageResource(R.drawable.weather);
+                exerciseView.setImageResource(R.drawable.ha_breathing2);
                 break;
             case 1:
-                exerciseView.setImageResource(R.drawable.meditate);
+                exerciseView.setImageResource(R.drawable.sitingup2);
                 break;
             default: // default is all other numbers. default handles because imageNum starts at 0
-                exerciseView.setImageResource(R.mipmap.ic_launcher);
+                exerciseView.setImageResource(R.drawable.lying_down2);
                 break;
 
         }
@@ -109,9 +107,13 @@ public class BreathePage extends Fragment{
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        mTabHost = null;
+
     }
 
     public interface OnFragmentInteractionListener {
     }
 }
+
+//References
+//Exercise information adapted from:
+//https://www.nytimes.com/2016/11/09/well/mind/breathe-exhale-repeat-the-benefits-of-controlled-breathing.html?_r=0
