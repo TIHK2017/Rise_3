@@ -20,6 +20,6 @@
         android:layout_gravity="start"
         app:menu="@menu/my_navigation_items"
         app:itemBackground="@color/colorPrimaryLight"
-        app:itemIconTint="@drawable/background"
-        app:itemTextColor="@drawable/background"/>
+        app:itemIconTint="@drawable/icon_color"
+        app:itemTextColor="@drawable/icon_color"/>
 </LinearLayout>

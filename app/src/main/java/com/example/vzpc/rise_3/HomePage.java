@@ -33,7 +33,7 @@ public class HomePage extends Fragment {
         super.onCreate(savedInstanceState);
         if (savedInstanceState != null) {
             // restore the text that you saved in from onPause()
-            // also remember to write onPaust()
+            // also remember to write onPause()
         }
     }
 
