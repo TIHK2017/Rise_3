@@ -24,6 +24,8 @@ public class RiseApp extends AppCompatActivity implements
 
 {
     SharedPreferences sharedPref = null;
+    //data that we are saving
+    int current_temp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -31,6 +33,8 @@ public class RiseApp extends AppCompatActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rise_app);
         sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
+        current_temp = 80;
+        savePreferences("Current Temp", current_temp);
 
         // saves username to Shared Preferences
         String name = getIntent().getExtras().getString("Username");
@@ -81,6 +85,13 @@ public class RiseApp extends AppCompatActivity implements
     {
         Editor edit = sharedPref.edit();
         edit.putString(key, value);
+        edit.commit();
+    }
+
+    private void savePreferences(String key, int value)
+    {
+        Editor edit = sharedPref.edit();
+        edit.putInt(key, value);
         edit.commit();
     }
 }

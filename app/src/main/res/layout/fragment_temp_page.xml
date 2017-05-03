@@ -158,7 +158,6 @@
             android:layout_marginStart="8dp"
             android:layout_marginTop="8dp"
             android:hint="75"
-            android:text="Current: 80 °F"
             android:textColor="@color/colorWhite"
             android:textColorHint="@color/colorlightGray"
             android:textSize="18sp"
